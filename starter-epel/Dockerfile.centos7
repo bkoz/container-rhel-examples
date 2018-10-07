@@ -18,7 +18,7 @@ LABEL name="acme/starter-epel" \
       io.openshift.tags="acme,starter-epel,starter,epel"
 
 ### Add your package needs here
-RUN INSTALL_PKGS="wget git" && \
+RUN INSTALL_PKGS="wget git bash-completion" && \
     yum -y install epel-release && \
     yum -y install --setopt=tsflags=nodocs ${INSTALL_PKGS} && \
     yum clean all
