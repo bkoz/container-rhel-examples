@@ -18,7 +18,7 @@ LABEL name="acme/starter-epel" \
       io.openshift.tags="acme,starter-epel,starter,epel"
 
 ### Add your package needs here
-RUN INSTALL_PKGS="jq" && \
+RUN INSTALL_PKGS="wget git" && \
     yum -y install epel-release && \
     yum -y install --setopt=tsflags=nodocs ${INSTALL_PKGS} && \
     yum clean all
@@ -34,6 +34,12 @@ RUN chmod -R ug+x ${APP_ROOT}/bin && sync && \
     useradd -l -u ${USER_UID} -r -g 0 -d ${APP_ROOT} -s /sbin/nologin -c "${USER_NAME} user" ${USER_NAME} && \
     chown -R ${USER_UID}:0 ${APP_ROOT} && \
     chmod -R g=u ${APP_ROOT}
+
+#
+# Install the oc binary.
+#
+RUN curl  https://mirror.openshift.com/pub/openshift-v3/clients/3.10.51/linux/oc.tar.gz | tar zxf - -O > ${APP_ROOT}/bin/oc && \
+    chmod u=rwx,g=rx,o=rx ${APP_ROOT}/bin/oc
 
 ####### Add app-specific needs below. #######
 ### Containers should NOT run as root as a good practice
