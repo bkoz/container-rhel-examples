@@ -38,7 +38,7 @@ RUN chmod -R ug+x ${APP_ROOT}/bin && sync && \
 #
 # Install the oc binary.
 #
-RUN curl  https://mirror.openshift.com/pub/openshift-v3/clients/3.10.51/linux/oc.tar.gz | tar zxf - -O > ${APP_ROOT}/bin/oc && \
+RUN curl https://mirror.openshift.com/pub/openshift-v3/clients/3.10.51/linux/oc.tar.gz | tar zxf - -O > ${APP_ROOT}/bin/oc && \
     chmod u=rwx,g=rx,o=rx ${APP_ROOT}/bin/oc
 
 ####### Add app-specific needs below. #######
